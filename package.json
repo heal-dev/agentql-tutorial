@@ -1,0 +1,16 @@
+{
+  "name": "agentql-tutorial",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --env-file=.env --test --experimental-strip-types test/**.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@playwright/test": "^1.49.0",
+    "agentql": "^1.6.0",
+    "playwright": "^1.49.0"
+  }
+}
