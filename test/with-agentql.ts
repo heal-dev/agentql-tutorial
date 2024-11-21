@@ -33,8 +33,6 @@ afterEach(async (testContext) => {
   await TEST_TO_PAGE.get(testContext).close();
 });
 
-const TODO_ITEMS = ['Buy milk', 'Buy eggs'];
-
 describe('With AgentQL', () => {
   beforeEach(async (testContext) => {
     const page = TEST_TO_PAGE.get(testContext);
@@ -64,7 +62,7 @@ describe('With AgentQL', () => {
     const newTodo = await page.getByPrompt('Entry to add todo items');
 
     // Create 1st todo.
-    await newTodo.fill(TODO_ITEMS[0]);
+    await newTodo.fill('Use AgentQL');
     await newTodo.press('Enter');
 
     const todoItemsQuery = `{
@@ -73,14 +71,14 @@ describe('With AgentQL', () => {
 
     // Make sure the list only has one todo item.
     const { todo_items: itemsBefore } = await page.queryData(todoItemsQuery);
-    Assert.deepStrictEqual(itemsBefore, [TODO_ITEMS[0]]);
+    Assert.deepStrictEqual(itemsBefore, ['Use AgentQL']);
 
     // Create 2nd todo.
-    await newTodo.fill(TODO_ITEMS[1]);
+    await newTodo.fill('Use Heal.dev');
     await newTodo.press('Enter');
 
     // Make sure the list only has one todo item.
     const { todo_items: itemsAfter } = await page.queryData(todoItemsQuery);
-    Assert.deepStrictEqual(itemsAfter, [TODO_ITEMS[0], TODO_ITEMS[1]]);
+    Assert.deepStrictEqual(itemsAfter, ['Use AgentQL', 'Use Heal.dev']);
   });
 });

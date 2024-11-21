@@ -32,8 +32,6 @@ afterEach(async (testContext) => {
   await TEST_TO_PAGE.get(testContext).close();
 });
 
-const TODO_ITEMS = ['Buy milk', 'Buy eggs'];
-
 describe('Without AgentQL', () => {
   test('get started link', async (testContext) => {
     const page = TEST_TO_PAGE.get(testContext);
@@ -54,20 +52,20 @@ describe('Without AgentQL', () => {
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
     // Create 1st todo.
-    await newTodo.fill(TODO_ITEMS[0]);
+    await newTodo.fill('Use AgentQL');
     await newTodo.press('Enter');
 
     // Make sure the list only has one todo item.
-    await expect(page.getByTestId('todo-title')).toHaveText([TODO_ITEMS[0]]);
+    await expect(page.getByTestId('todo-title')).toHaveText('Use AgentQL');
 
     // Create 2nd todo.
-    await newTodo.fill(TODO_ITEMS[1]);
+    await newTodo.fill('Use Heal.dev');
     await newTodo.press('Enter');
 
     // Make sure the list now has two todo items.
     await expect(page.getByTestId('todo-title')).toHaveText([
-      TODO_ITEMS[0],
-      TODO_ITEMS[1]
+      'Use AgentQL',
+      'Use Heal.dev'
     ]);
   });
 });
